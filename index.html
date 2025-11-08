@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatos PNP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Modal de formatos -->
+        <div class="modal-overlay hidden" id="formatos-modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2 id="modal-categoria-actual">Formatos</h2>
+                    <button class="modal-close" id="btnCloseModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="formatos-grid" id="modal-formatos-container">
+                        <!-- Los formatos se mostrarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>Formatos PNP</h1>
+                </div>
+                <div class="search-container">
+                    <div class="search-tools">
+                        <div class="search-input">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Buscar formatos...">
+                        </div>
+                        <div class="filter-container">
+                            <i class="fas fa-filter"></i>
+                            <select style="background-color: black;" id="categoryFilter">
+                                <option  value="">Todas las categorías</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="categorias-section" id="categorias-container">
+                <div class="categorias-grid" id="categorias-lista">
+                    <!-- Las categorías se mostrarán aquí en grid -->
+                </div>
+            </section>
+
+            <section class="formatos-section hidden" id="formatos-section">
+                <div class="formatos-header">
+                    <button class="btn-back" id="btnBack">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver a Categorías</span>
+                    </button>
+                    <h2 id="categoria-actual">Formatos</h2>
+                </div>
+                <div class="formatos-grid" id="formatos-container">
+                    <!-- Los formatos se mostrarán aquí en grid -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <template id="categoria-template">
+        <div class="categoria-card">
+            <div class="categoria-icon">
+                <i class="fas fa-folder"></i>
+            </div>
+            <h3 class="categoria-nombre"></h3>
+            <p class="categoria-descripcion"></p>
+            <div class="categoria-stats">
+                <span class="contador-formatos">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="count"></span> formatos
+                </span>
+                <button class="btn-ver">Ver Formatos</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="formato-template">
+        <div class="formato-card">
+            <div class="formato-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="formato-content">
+                <h3 class="formato-titulo"></h3>
+                <p class="formato-autor"></p>
+                <div class="formato-nivel"></div>
+            </div>
+            <div class="formato-actions">
+                <button class="btn-preview" title="Vista previa PDF">
+                    <i class="fas fa-file-pdf"></i>
+                </button>
+                <a class="btn-download" title="Descargar" href="https://drive.google.com/drive/folders/tu-carpeta-compartida" target="_blank">
+                    <i class="fas fa-download"></i>
+                </a>
+                <button class="btn-share" title="Compartir">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
