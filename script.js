@@ -110,26 +110,37 @@ function crearFormatoCard(formato) {
     // Configurar vista previa PDF
     const btnPreview = card.querySelector('.btn-preview');
     btnPreview.addEventListener('click', () => {
-        window.open(formato.link, '_blank');
+        let previewUrl = formato.link;
+        
+        // Convertir a URL de vista previa sin login si es necesario
+        if (previewUrl.includes('drive.google.com')) {
+            const fileIdMatch = previewUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+            if (fileIdMatch) {
+                const fileId = fileIdMatch[1];
+                previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+            }
+        }
+        
+        window.open(previewUrl, '_blank');
     });
     
     // Configurar botón de descarga (descarga directa del PDF)
     const btnDownload = card.querySelector('.btn-download');
     btnDownload.addEventListener('click', (e) => {
         e.preventDefault();
-        // Convertir URL de Drive a URL de descarga directa
         let downloadUrl = formato.link;
         
-        // Si es un enlace de Drive, extraer el ID y crear URL de descarga
+        // Convertir URL de Drive a URL de descarga directa sin login
         if (downloadUrl.includes('drive.google.com')) {
             const fileIdMatch = downloadUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
             if (fileIdMatch) {
                 const fileId = fileIdMatch[1];
+                // URL de descarga directa que no requiere login
                 downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
             }
         }
         
-        // Crear un elemento invisible para descargar
+        // Crear y ejecutar la descarga
         const link = document.createElement('a');
         link.href = downloadUrl;
         link.download = `${formato.titulo}.pdf`;
