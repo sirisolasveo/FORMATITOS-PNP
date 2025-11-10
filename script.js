@@ -19,7 +19,7 @@ const categorias = [
                 titulo: "Acta de Informe de Lesionados",
                 autor: "SOT3 Luis Gamarra",
                 nivel: "Bueno",
-                link: "https://drive.google.com/sample2",
+                link: "https://drive.google.com/file/d/1UQiOBT2e7V-DByymC_HFj3SlD8jjI5-6/view?usp=drive_link",
                 fechaActualizacion: "2025-10-15"
             },
             {
@@ -113,9 +113,30 @@ function crearFormatoCard(formato) {
         window.open(formato.link, '_blank');
     });
     
-    // Configurar botón de descarga (redirección a Drive)
+    // Configurar botón de descarga (descarga directa del PDF)
     const btnDownload = card.querySelector('.btn-download');
-    btnDownload.href = "https://drive.google.com/drive/folders/tu-carpeta-compartida";
+    btnDownload.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Convertir URL de Drive a URL de descarga directa
+        let downloadUrl = formato.link;
+        
+        // Si es un enlace de Drive, extraer el ID y crear URL de descarga
+        if (downloadUrl.includes('drive.google.com')) {
+            const fileIdMatch = downloadUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+            if (fileIdMatch) {
+                const fileId = fileIdMatch[1];
+                downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            }
+        }
+        
+        // Crear un elemento invisible para descargar
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = `${formato.titulo}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
     
     // Configurar compartir
     const btnShare = card.querySelector('.btn-share');
@@ -426,4 +447,3 @@ function aplicarFiltros() {
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', inicializarApp);
-
