@@ -11,7 +11,7 @@ const categorias = [
                 titulo: "Acta de Intervención por Accidente",
                 autor: "SOT2 Juan Pérez",
                 nivel: "Excelente",
-                link: "https://drive.google.com/drive/folders/1wQVdGPKCK5EO6ncYeJ6oiafubeojEmv2?usp=drive_link",
+                link: "https://drive.google.com/file/d/1PyHYyxGtNX4QFD1twsSDGUvk-Rp7Uejt/view",
                 fechaActualizacion: "2025-11-01"
             },
             {
@@ -426,3 +426,4 @@ function aplicarFiltros() {
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', inicializarApp);
+
